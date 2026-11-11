@@ -2,8 +2,8 @@
 
 **AI applications · Agents · Developer tools**
 
-围绕文献研究、代码修复和开发流程，构建可以运行、验证和回看的 AI 应用。
-目前主要使用 Python，关注检索证据、工具执行边界，以及测试反馈如何帮助 Agent 完成任务。
+围绕文献研究、编程 Agent 和开发流程，构建能跑起来、能验证、能回看的 AI 应用。
+目前主要使用 Python，关注检索证据、工具执行的边界，以及执行过程怎么被记录和复现。
 
 [Projects](#selected-projects) · [Engineering notes](#engineering-notes)
 
@@ -19,15 +19,15 @@
 
 [架构](https://github.com/yycf1/paper-research-agent/blob/main/docs/architecture.md) · [使用说明](https://github.com/yycf1/paper-research-agent/blob/main/docs/usage.md) · [验证记录](https://github.com/yycf1/paper-research-agent/blob/main/docs/validation.md)
 
-### [RepairLab](https://github.com/yycf1/repairlab)
+### [EasyCode](https://github.com/yycf1/easycode)
 
-**代码仓库修复与验证 Agent** — 根据源码、行为约定和测试反馈定位问题，修改补丁并在干净副本中验收。
+**极简编程 Agent** — 给它一个目录和一句任务，它读代码、改文件、在加固容器里跑命令，做完用中文总结。
 
-将测试证据绑定到当前补丁，逐项核对关键用例；工作台提供执行记录、Git diff 和验收报告，支持本地可信执行与 Docker runner。
+学习参考 pi 的极简架构：手写 86 行 agent 循环与原生 tool_calls，用四个最小工具完成读写与执行，编辑要求精确且唯一匹配；bash 默认进一次性加固容器；SQLite 事件流配合 SSE，让每一步决策都能回看。
 
-`Python` `Pydantic` `pytest` `FastAPI` `SQLite` `Docker`
+`Python` `FastAPI` `SQLite` `Docker` `原生 tool_calls`
 
-[架构](https://github.com/yycf1/repairlab/blob/main/docs/%E6%9E%B6%E6%9E%84%E8%AF%B4%E6%98%8E.md) · [评测与复跑](https://github.com/yycf1/repairlab/tree/main/docs/evaluation) · [CI](https://github.com/yycf1/repairlab/actions)
+[README](https://github.com/yycf1/easycode) · [验证记录](https://github.com/yycf1/easycode/blob/main/docs/%E9%AA%8C%E8%AF%81%E8%AE%B0%E5%BD%95.md)
 
 ### [Session Trash](https://github.com/yycf1/dsh-plugin-delete-session)
 
@@ -37,8 +37,8 @@
 
 ## Engineering notes
 
-- [工具权限与任务意图](https://github.com/yycf1/paper-research-agent/blob/main/docs/intent-and-permissions.md)：将模型决策与宿主执行约束分开。
-- [结构化验收与关键用例](https://github.com/yycf1/repairlab/blob/main/docs/%E7%BB%93%E6%9E%84%E5%8C%96%E9%AA%8C%E6%94%B6%E4%B8%8E%E5%85%B3%E9%94%AE%E7%94%A8%E4%BE%8B.md)：确认哪些测试真正运行，以及哪些结果足以支持补丁通过。
-- [修复机制的离线复跑](https://github.com/yycf1/repairlab/tree/main/docs/evaluation)：固定样例、预期结果与运行条件，区分脚本演示和真实模型评测。
+- [工具权限与任务意图](https://github.com/yycf1/paper-research-agent/blob/main/docs/intent-and-permissions.md)：把模型决策和宿主执行约束分开。
+- [命令执行的沙箱边界](https://github.com/yycf1/easycode/blob/main/docs/Docker%E5%AE%B9%E5%99%A8%E9%9A%94%E7%A6%BB%E9%80%9F%E8%AE%B0.md)：把不可控的 shell 关进一次性容器，限制网络、权限与资源。
+- [验证记录：只写跑过的](https://github.com/yycf1/easycode/blob/main/docs/%E9%AA%8C%E8%AF%81%E8%AE%B0%E5%BD%95.md)：每次改动跑了什么、结果如何、留下哪些边界。
 
 实现细节、复现命令及当前边界记录在各项目仓库中。
